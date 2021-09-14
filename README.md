@@ -106,17 +106,27 @@ python3 train.py data-bin/wmt14.en-de_kd --source-lang en --target-lang de  --sa
 ```
 
 
+### Evaluation
+```bash
+fairseq-generate data-bin/wmt14.en-de_kd  --path PATH_TO_A_CHECKPOINT \
+    --gen-subset test --task translation_lev --iter-decode-max-iter 0 \
+    --iter-decode-eos-penalty 0 --beam 1 --remove-bpe --print-step --batch-size 100
+```
+**Note**: 1) Add `--plain-ctc --model-overrides '{"ctc_beam_size": 1, "plain_ctc": True}'` if it is CTC based; 2) Change the task to `translation_glat` if it is GLAT based.
+
+
+
 
 ## Output
 
-We in addition provide the output of CTC w/ DSLP, GLAT w/ DSLP, CMLM w/ DSLP, and Vanilla NAT w/ DSLP for review purpose.
+We in addition provide the output of CTC w/ DSLP, CTC w/ DSLP & Mixed Training, Vanilla NAT w/ DSLP, Vanilla NAT w/ DSLP with Mixed Training, GLAT w/ DSLP, and CMLM w/ DSLP for review purpose.
 
 | Model        |     Reference      |  Hypothesis |
 | ------------- |:-------------:| :-----:|
 | CTC w/ DSLP     | [ref](output/ctc_sd.ref) | [hyp](output/ctc_sd.hyp) | 
-| CTC w/ DSLP & Mixed Training  | [ref](output/ctc_sd.ref) | [hyp](output/ctc_sd.hyp) | 
+| CTC w/ DSLP & Mixed Training  | [ref](output/ctc_sd_ss.ref) | [hyp](output/ctc_sd_ss.hyp) | 
 | Vanilla NAT w/ DSLP | [ref](output/null_sd.ref) | [hyp](output/null_sd.hyp)   | 
-| Vanilla NAT w/ DSLP & Mixed Training | [ref](output/null_sd.ref) | [hyp](output/null_sd.hyp)   |
+| Vanilla NAT w/ DSLP & Mixed Training | [ref](output/null_sd_ss.ref) | [hyp](output/null_sd_ss.hyp)   |
 | GLAT w/ DSLP   | [ref](output/glat_sd.ref) | [hyp](output/glat_sd.hyp) | 
 | CMLM w/ DSLP | [ref](output/cmlm_sd.ref) | [hyp](output/cmlm_sd.hyp)  |  
 
