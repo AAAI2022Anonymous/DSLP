@@ -1,4 +1,4 @@
-# This repo contains code and output for our EMNLP submission:
+# This repo contains code, training/evaluation scripts, output for our AAAI 2022 submission:
 
 Non-Autoregressive Translation with Layer-Wise Prediction and Deep Supervision
 
